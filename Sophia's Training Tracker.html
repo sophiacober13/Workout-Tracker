@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sophia's Training Tracker</title>
+<style>
+:root{
+  --bg:#0f1420; --card:#1a2233; --border:#2a3550; --text:#eef1f8; --sub:#9aa7c2;
+  --accent:#4f8cff; --accent2:#3ee08a; --danger:#ff6b6b;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f5f7fb; --card:#ffffff; --border:#dde3ef; --text:#141a26; --sub:#5b6579;
+  }
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,Segoe UI,Roboto,sans-serif;}
+header{position:sticky;top:0;padding:14px 16px calc(10px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:1px solid var(--border);z-index:10;}
+h1{font-size:1.15rem;margin:0 0 10px;}
+nav{display:flex;gap:6px;overflow-x:auto;}
+nav button{flex:0 0 auto;padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.85rem;cursor:pointer;}
+nav button.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+main{padding:14px 16px 40px;max-width:640px;margin:0 auto;}
+section{display:none;}
+section.active{display:block;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;}
+.card h3{margin:0 0 8px;font-size:0.95rem;color:var(--accent);}
+.card h4{margin:10px 0 6px;font-size:0.85rem;color:var(--sub);}
+table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--border);}
+th{color:var(--sub);font-weight:600;}
+.overflow{overflow-x:auto;}
+ul{margin:4px 0;padding-left:18px;font-size:0.85rem;}
+li{margin-bottom:4px;}
+label{display:block;font-size:0.78rem;color:var(--sub);margin:8px 0 3px;}
+input,select,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;}
+button.primary{margin-top:12px;width:100%;padding:11px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:0.9rem;font-weight:600;cursor:pointer;}
+button.del{background:none;border:none;color:var(--danger);cursor:pointer;font-size:0.8rem;padding:2px 6px;}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;background:var(--border);font-size:0.72rem;color:var(--sub);margin-left:6px;}
+.pr{color:var(--accent2);font-weight:700;}
+.flag{border-left:3px solid var(--danger);padding:8px 10px;background:rgba(255,107,107,0.08);border-radius:6px;font-size:0.8rem;margin-top:8px;}
+.small{color:var(--sub);font-size:0.78rem;}
+.empty{color:var(--sub);font-size:0.85rem;padding:8px 0;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏉 Sophia's Training Tracker</h1>
+  <nav>
+    <button data-tab="plan" class="active">Plan</button>
+    <button data-tab="logLift">Log Lift</button>
+    <button data-tab="logRun">Log Run</button>
+    <button data-tab="history">History &amp; PRs</button>
+  </nav>
+</header>
+<main>
+
+<section id="plan" class="active">
+  <div class="card">
+    <h3>Weekly Overview</h3>
+    <div class="overflow"><table>
+      <tr><th>Day</th><th>AM</th><th>PM</th></tr>
+      <tr><td>Mon</td><td>Leg Day + Physio D1</td><td>Long Run #1</td></tr>
+      <tr><td>Tue</td><td>Chest/Shoulders/Arms</td><td>Broken Bronco (progressive)</td></tr>
+      <tr><td>Wed</td><td>Leg Day + Physio D2</td><td>Off (film) / rest</td></tr>
+      <tr><td>Thu</td><td>Back/Triceps</td><td>Full Bronco @ Malcolm's</td></tr>
+      <tr><td>Fri</td><td>Full Body (lighter)</td><td>Intervals (200m reps)</td></tr>
+      <tr><td>Sat</td><td>Chest/Shoulders/Arms</td><td>Assault Bike intervals</td></tr>
+      <tr><td>Sun</td><td>Rest</td><td>Rest</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>Leg Day (Mon/Wed)</h3>
+    <ul>
+      <li>Back Squat — 4x4-5 heavy (+jump contrast set)</li>
+      <li>Hip Thrust — target load; check with PT before pushing past her 3x8</li>
+      <li>RDL (bilateral) — 3x6</li>
+      <li>Bulgarian Split Squat — 3x8 each leg</li>
+      <li>Step-Ups — 3x10 each leg</li>
+      <li>Leg Extension — 3x12</li>
+    </ul>
+    <h4>Physio Day 1 (Mon)</h4>
+    <ul><li>Single Leg Bridge 3x8 · Side Step (band) 3x10 · BOSU Balance 3x3x20-30s · Fire Hydrant (band) 3x8 · Eccentric Hamstring Curl 3x8 · Heel Raise (knee bent) 3x8</li></ul>
+    <h4>Physio Day 2 (Wed)</h4>
+    <ul><li>Hex Bar Deadlift 3x8 · Nordic Curl 3x8 · Anterior Lunge (BOSU) 3x8 · Lateral Lunge 3x8 · Eccentric Heel Raise 3x8 · Soleus/Ball-Squeeze Raise (alt.) 3x8 · Single Leg RDL 3x8</li></ul>
+  </div>
+
+  <div class="card">
+    <h3>Chest/Shoulders/Arms (Tue/Sat)</h3>
+    <ul><li>Bench 4x5-6 · OHP 3x6-8 · Incline DB 3x8-10 · Pec Fly 3x10-12 · Lateral Raise 3x12-15 · Bicep Curl 3x8-10 · Zottman 2x10-12 · Pushups AMRAP · Core 3x12-15</li></ul>
+  </div>
+
+  <div class="card">
+    <h3>Back/Triceps (Thu)</h3>
+    <ul><li>Bent Over Row or Wide Grip Row 4x6-8 · Lat Pulldown 3x8-9 · Chest Supported Row 2x8-9 · Lat Pullover 3x10-12 · Face Pulls 3x12-15 · Tricep Pushdown 3x10-12 · Tricep Ext/Dips 2x10-12 · Back Extension 2x12-15</li></ul>
+  </div>
+
+  <div class="card">
+    <h3>Full Body Friday (lighter)</h3>
+    <ul><li>Squat 3x6 (~65-70%) · Bench 3x6 (~65-70%) · Hip Thrust 3x8 mod. · Leg Extension 3x12 · Row/Pulldown 3x8 · Bicep/Tricep superset light · Core + mobility</li></ul>
+  </div>
+
+  <div class="card">
+    <h3>Long Run Progression (Mon, 4-wk cycle)</h3>
+    <div class="overflow"><table>
+      <tr><th>Wk</th><th>Distance</th><th>Pace</th></tr>
+      <tr><td>1</td><td>3 km</td><td>conversational</td></tr>
+      <tr><td>2</td><td>4 km</td><td>same effort</td></tr>
+      <tr><td>3</td><td>5 km</td><td>same effort</td></tr>
+      <tr><td>4</td><td>5-6 km</td><td>benchmark pace</td></tr>
+    </table></div>
+    <p class="small">10% rule — restart at Wk1 with new baseline after Wk4. Repeat a week if it feels unusually hard.</p>
+  </div>
+
+  <div class="card">
+    <h3>200m Interval Progression (Fri, 4-wk cycle)</h3>
+    <div class="overflow"><table>
+      <tr><th>Wk</th><th>Reps</th><th>Effort</th><th>Recovery</th></tr>
+      <tr><td>1</td><td>6</td><td>85-90%</td><td>90s</td></tr>
+      <tr><td>2</td><td>8</td><td>85-90%</td><td>90s</td></tr>
+      <tr><td>3</td><td>8</td><td>90%</td><td>75s</td></tr>
+      <tr><td>4</td><td>10</td><td>90-95%</td><td>60-75s</td></tr>
+    </table></div>
+    <p class="small">Stop adding reps once splits drop &gt;8-10% off your best rep that session — quality over count.</p>
+  </div>
+
+  <div class="flag">⚠ Sprints/hard deceleration: PT-clearance gated (quad symmetry, hop test). Stepping stone now: 4-6 strides @ 75-80% effort, easy in/out, tacked onto an easy run only if pain/swelling-free.</div>
+
+  <div class="card">
+    <h3>Broken Bronco Progression (Tue)</h3>
+    <div class="overflow"><table>
+      <tr><th>Wk</th><th>Structure</th><th>Rest</th></tr>
+      <tr><td>1</td><td>3x half-Bronco, hard</td><td>3:00</td></tr>
+      <tr><td>2</td><td>3x half-Bronco, faster</td><td>2:30</td></tr>
+      <tr><td>3</td><td>4x half-Bronco</td><td>2:00</td></tr>
+      <tr><td>4</td><td>Full time trial</td><td>—</td></tr>
+    </table></div>
+    <p class="small">Restart cycle after week 4. Thu's Malcolm's Bronco stays a full test throughout — that's the real benchmark.</p>
+  </div>
+
+  <div class="card">
+    <h3>Winter Cardio Contingency</h3>
+    <ul>
+      <li>Outdoor running stays default as long as conditions allow — proper gear extends the season further than expected</li>
+      <li>Non-treadmill indoor backup: assault bike, rower, ski erg, stair repeats — rotate to fight boredom</li>
+      <li>Check campus/community rec for an indoor track or field house before defaulting to treadmill</li>
+      <li>Bronco/broken-Bronco work doesn't need to pause for weather</li>
+      <li>Pair winter sessions with a teammate/friend — structural fix, not a willpower ask</li>
+    </ul>
+  </div>
+
+  <div class="flag">⚠ Speed work, max-effort sprints, and lower-body plyometrics are gated by PT clearance (quad symmetry, hop tests) — not added independently, given ACL history.</div>
+</section>
+
+<section id="logLift">
+  <div class="card">
+    <h3>Log a Lift</h3>
+    <form id="liftForm">
+      <label>Date</label><input type="date" id="lDate" required>
+      <label>Category</label>
+      <select id="lCat"><option>Leg Day</option><option>Chest/Shoulders/Arms</option><option>Back/Triceps</option><option>Full Body</option></select>
+      <label>Exercise</label><input type="text" id="lEx" placeholder="e.g. Hip Thrust" required>
+      <label>Top Weight (lbs)</label><input type="number" step="0.5" id="lWeight" placeholder="e.g. 300">
+      <label>Sets x Reps</label><input type="text" id="lSetsReps" placeholder="e.g. 3 x 6">
+      <label>Notes</label><textarea id="lNotes" rows="2" placeholder="optional"></textarea>
+      <button type="submit" class="primary">Add Entry</button>
+    </form>
+  </div>
+  <div class="card"><h3>Recent Entries</h3><div id="liftList" class="overflow"></div></div>
+</section>
+
+<section id="logRun">
+  <div class="card">
+    <h3>Log a Run</h3>
+    <form id="runForm">
+      <label>Date</label><input type="date" id="rDate" required>
+      <label>Type</label>
+      <select id="rType"><option>Long Run</option><option>Intervals</option><option>Broken Bronco</option><option>Full Bronco</option><option>Assault Bike</option><option>Easy Run</option></select>
+      <label>Distance (km)</label><input type="number" step="0.01" id="rDist">
+      <label>Time (mm:ss)</label><input type="text" id="rTime" placeholder="e.g. 26:06">
+      <label>Notes</label><textarea id="rNotes" rows="2" placeholder="optional"></textarea>
+      <button type="submit" class="primary">Add Entry</button>
+    </form>
+  </div>
+  <div class="card"><h3>Recent Runs</h3><div id="runList" class="overflow"></div></div>
+</section>
+
+<section id="history">
+  <div class="card"><h3>Lift PRs (auto-calculated)</h3><div id="prList" class="overflow"></div></div>
+  <div class="card"><h3>Full Lift Log</h3><div id="fullLiftLog" class="overflow"></div></div>
+  <div class="card"><h3>Full Run Log</h3><div id="fullRunLog" class="overflow"></div></div>
+</section>
+
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function load(key){try{return JSON.parse(localStorage.getItem(key))||[];}catch(e){return [];}}
+function save(key,arr){try{localStorage.setItem(key,JSON.stringify(arr));}catch(e){}}
+
+// Seed real running history on first load only (never overwrites existing data)
+const SEED_RUNS=[
+  {date:"2026-09-29",type:"Intervals",dist:"2.01",time:"13:39 (13:46 elapsed)",notes:"200m x10 intervals. Splits: 1km 6:52, 2km 6:37. Peak pace ~3:09/km, recovery pace ~18-19/km walk/jog between reps."},
+  {date:"",type:"Full Bronco",dist:"",time:"8:00",notes:"Broken bronco (incomplete rep) - Sept 22"},
+  {date:"",type:"Long Run",dist:"6.02",time:"50:44",notes:"PR: fastest 5K in 2026. Date unconfirmed (cropped screenshot)."},
+  {date:"",type:"Easy Run",dist:"3.30",time:"26:06",notes:"5-week streak reached; stopped 6x, walked last km. Date unconfirmed (cropped screenshot)."},
+  {date:"2026-09-14",type:"Easy Run",dist:"3.54",time:"24:48",notes:"4-week running streak reached."},
+  {date:"2026-09-10",type:"Easy Run",dist:"0.91",time:"6:19",notes:"Very short - shakeout/warmup."},
+  {date:"2026-08-31",type:"Long Run",dist:"4.47",time:"30:58",notes:"PR: fastest 2 miles in 2026 (5m8s faster)."}
+];
+if(localStorage.getItem('runs')===null){
+  save('runs',SEED_RUNS);
+}
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); $(b.dataset.tab).classList.add('active');
+  if(b.dataset.tab==='history') renderHistory();
+});
+
+$('liftForm').onsubmit=e=>{
+  e.preventDefault();
+  const arr=load('lifts');
+  arr.unshift({date:$('lDate').value,cat:$('lCat').value,ex:$('lEx').value,w:$('lWeight').value,sr:$('lSetsReps').value,notes:$('lNotes').value});
+  save('lifts',arr); e.target.reset(); renderLifts();
+};
+$('runForm').onsubmit=e=>{
+  e.preventDefault();
+  const arr=load('runs');
+  arr.unshift({date:$('rDate').value,type:$('rType').value,dist:$('rDist').value,time:$('rTime').value,notes:$('rNotes').value});
+  save('runs',arr); e.target.reset(); renderRuns();
+};
+
+function delEntry(key,idx){const arr=load(key);arr.splice(idx,1);save(key,arr);renderLifts();renderRuns();renderHistory();}
+
+function renderLifts(){
+  const arr=load('lifts');
+  $('liftList').innerHTML = arr.length? tableFrom(arr.slice(0,8),['date','cat','ex','w','sr'],['Date','Cat','Exercise','Wt','Sets'],'lifts') : '<p class="empty">No entries yet.</p>';
+}
+function renderRuns(){
+  const arr=load('runs');
+  $('runList').innerHTML = arr.length? tableFrom(arr.slice(0,8),['date','type','dist','time'],['Date','Type','Km','Time'],'runs') : '<p class="empty">No entries yet.</p>';
+}
+function tableFrom(arr,fields,heads,key){
+  let h='<table><tr>'+heads.map(x=>'<th>'+x+'</th>').join('')+'<th></th></tr>';
+  arr.forEach((row,i)=>{
+    h+='<tr>'+fields.map(f=>'<td>'+(row[f]||'—')+'</td>').join('')+'<td><button class="del" onclick="delEntry(\''+key+'\','+i+')">✕</button></td></tr>';
+  });
+  return h+'</table>';
+}
+function renderHistory(){
+  const lifts=load('lifts');
+  const prs={};
+  lifts.forEach(l=>{const w=parseFloat(l.w); if(!isNaN(w)&&(!prs[l.ex]||w>prs[l.ex])) prs[l.ex]=w;});
+  const keys=Object.keys(prs).sort();
+  $('prList').innerHTML = keys.length? '<table><tr><th>Exercise</th><th>PR (lbs)</th></tr>'+
+    keys.map(k=>'<tr><td>'+k+'</td><td class="pr">'+prs[k]+'</td></tr>').join('')+'</table>'
+    : '<p class="empty">Log some lifts to see PRs.</p>';
+  $('fullLiftLog').innerHTML = lifts.length? tableFrom(lifts,['date','cat','ex','w','sr','notes'],['Date','Cat','Exercise','Wt','Sets','Notes'],'lifts') : '<p class="empty">No entries yet.</p>';
+  $('fullRunLog').innerHTML = load('runs').length? tableFrom(load('runs'),['date','type','dist','time','notes'],['Date','Type','Km','Time','Notes'],'runs') : '<p class="empty">No entries yet.</p>';
+}
+renderLifts(); renderRuns();
+</script>
+</body>
+</html>
